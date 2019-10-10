@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-public class Door implements HomeComponents {
+public class Door implements HomeComponent {
     private final String id;
     // this field show current status of the door (closed/open)
     private boolean status;

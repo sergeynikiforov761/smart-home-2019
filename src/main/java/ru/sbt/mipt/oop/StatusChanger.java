@@ -1,8 +1,8 @@
 package ru.sbt.mipt.oop;
 
 public class StatusChanger {
-    public static void setStatus(HomeComponents homeComponents, boolean status){
-        homeComponents.setStatus(status);
+    public static void setStatus(HomeComponent homeComponent, boolean status){
+        homeComponent.setStatus(status);
     }
 }
 

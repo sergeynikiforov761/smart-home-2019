@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-public class ConsoleThreeMessageSender<T, K> implements Sender {
+public class ConsoleComplexMessageSender<T, K> implements Sender {
 
     private String messageFirst;
     private String messageSecond;
@@ -8,7 +8,7 @@ public class ConsoleThreeMessageSender<T, K> implements Sender {
     private T commandFirst;
     private K commandSecond;
 
-    public ConsoleThreeMessageSender(String messageFirst, String messageSecond, String messageThird, T commandFirst, K commandSecond){
+    public ConsoleComplexMessageSender(String messageFirst, String messageSecond, String messageThird, T commandFirst, K commandSecond){
         this.commandFirst = commandFirst;
         this.commandSecond = commandSecond;
         this.messageFirst = messageFirst;
@@ -16,8 +16,8 @@ public class ConsoleThreeMessageSender<T, K> implements Sender {
         this.messageThird = messageThird;
     }
 
-    public void sendCommand()
-    {
+    @Override
+    public void sendCommand() {
         System.out.println(this.messageFirst + this.commandFirst + this.messageSecond + this.commandSecond + this.messageThird);
     }
 }

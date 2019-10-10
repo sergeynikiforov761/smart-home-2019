@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-public interface HomeComponents {
+public interface HomeComponent {
     String getId();
     void setStatus(boolean status);
 }

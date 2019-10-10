@@ -10,6 +10,6 @@ public class Application {
         SmartHome smartHome = jsonReader.read();
         // начинаем цикл обработки событий
         SensorEvent event = NextSensorEvent.getNextSensorEvent();
-        Handler.processing(event, smartHome);
+        MainFunction.processing(event, smartHome);
     }
 }
