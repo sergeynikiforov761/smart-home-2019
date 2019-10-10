@@ -1,13 +1,13 @@
 package ru.sbt.mipt.oop;
 
-public class ExpressionComplexTypeHandler implements ExpressionHandler{
+public class ExpressionComplexTypeHandler<T> implements ExpressionHandler{
 
     private SensorEvent event;
     String operator;
-    SensorEventType firstType;
-    SensorEventType secondType;
+    T firstType;
+    T secondType;
 
-    public ExpressionComplexTypeHandler(SensorEvent event, String operator, SensorEventType firstType, SensorEventType secondType){
+    public ExpressionComplexTypeHandler(SensorEvent event, String operator, T firstType, T secondType){
         this.firstType = firstType;
         this.operator = operator;
         this.secondType = secondType;
