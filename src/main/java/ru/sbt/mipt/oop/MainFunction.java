@@ -1,14 +1,11 @@
 package ru.sbt.mipt.oop;
 
 public class MainFunction {
-    public static void processing(SensorEvent event, SmartHome smartHome){
-        while (event != null) {
-            Sender eventMessage = new ConsoleSimpleMessageSender<>("Got event: ", event);
-            eventMessage.sendCommand();
-            new ObtainLightEvent(event, smartHome).obtainEvent();
-            new ObtainDoorEvent(event, smartHome).obtainEvent();
-            event = NextSensorEvent.getNextSensorEvent();
-        }
-
+    public static SensorEvent processing(SensorEvent event, SmartHome smartHome) {
+        System.out.println("Got event: " + event);
+        new ProcessingLightEvent(event, smartHome).processEvent();
+        new ProcessingDoorEvent(event, smartHome).processEvent();
+        new ProcessingHallDoorEvent(event, smartHome).processEvent();
+        return new NextSensorEvent().getNextEvent();
     }
 }

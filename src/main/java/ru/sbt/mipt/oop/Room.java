@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 public class Room{
     private Collection<Light> lights;
@@ -24,4 +25,5 @@ public class Room{
     public String getName() {
         return name;
     }
+
 }

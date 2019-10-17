@@ -16,7 +16,6 @@ public class EventSimpleHandler<T> implements EventHandler{
 
     public void eventHandle(){
         StatusChanger.setStatus(homeComponent, status);
-        Sender consoleMessage = new ConsoleSimpleMessageSender<>(message, command);
-        consoleMessage.sendCommand();
+        System.out.println(message + command);
     }
 }

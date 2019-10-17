@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import java.util.function.Function;
+
 public class Light implements HomeComponent {
     // this field show current status of the light (off/on)
     private boolean status;
@@ -18,7 +20,12 @@ public class Light implements HomeComponent {
         return id;
     }
 
+    public boolean getStatus(){
+        return status;
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
     }
+
 }

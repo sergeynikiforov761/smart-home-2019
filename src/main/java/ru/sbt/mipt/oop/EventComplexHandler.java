@@ -9,7 +9,7 @@ public class EventComplexHandler implements EventHandler {
     private String secondMessage;
     private String thirdMessage;
 
-    public EventComplexHandler(HomeComponent homeComponent, Room room, boolean status, String firstMessage, String secondMessage, String thirdMessage){
+    public EventComplexHandler(HomeComponent homeComponent, Room room, boolean status, String firstMessage, String secondMessage, String thirdMessage) {
         this.firstMessage = firstMessage;
         this.homeComponent = homeComponent;
         this.room = room;
@@ -21,7 +21,6 @@ public class EventComplexHandler implements EventHandler {
     @Override
     public void eventHandle() {
         StatusChanger.setStatus(homeComponent, status);
-        Sender consoleMessage = new ConsoleComplexMessageSender<>(firstMessage, secondMessage, thirdMessage, homeComponent.getId(), room.getName());
-        consoleMessage.sendCommand();
+        System.out.println(firstMessage + homeComponent.getId() + secondMessage + room.getName() + thirdMessage);
     }
 }
