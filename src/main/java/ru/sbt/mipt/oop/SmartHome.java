@@ -2,9 +2,9 @@ package ru.sbt.mipt.oop;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
-public class SmartHome {
+public class SmartHome implements Actionable {
     Collection<Room> rooms;
 
     public SmartHome() {
@@ -21,5 +21,12 @@ public class SmartHome {
 
     public Collection<Room> getRooms() {
         return rooms;
+    }
+
+    @Override
+    public void execute(BiFunction<Object, Room, Void> function) {
+        for (Room room : rooms) {
+            room.execute(function);
+        }
     }
 }

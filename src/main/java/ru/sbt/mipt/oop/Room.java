@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import java.util.Collection;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
-public class Room{
+public class Room implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -26,4 +26,14 @@ public class Room{
         return name;
     }
 
+
+    @Override
+    public void execute(BiFunction<Object, Room, Void> function) {
+        for (Light light : lights) {
+            function.apply(light, this);
+        }
+        for (Door door : doors) {
+            function.apply(door, this);
+        }
+    }
 }

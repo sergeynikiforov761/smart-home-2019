@@ -15,18 +15,26 @@ public class ProcessingLightEvent implements ProcessingEvent {
 
     @Override
     public void processEvent() {
-        if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
-            // событие от источника света
-            new LightIterator(smartHome).actIterator((light, room) -> {
-                if (light.getId().equals(event.getObjectId())) {
-                    if (event.getType() == LIGHT_ON) {
-                        new EventComplexHandler(light, room, true, "Light ", " in room ", " was turned on.").eventHandle();
-                    } else {
-                        new EventComplexHandler(light, room, false, "Light ", " in room ", " was turned off.").eventHandle();
+
+        smartHome.execute((object, room) -> {
+                    if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
+                        if (object instanceof Light) {
+                            Light light = (Light) object;
+                            updateLightState(event, light, room);
+                        }
                     }
+                    return null;
                 }
-            return null;
-        });
+        );
+    }
+
+    private void updateLightState(SensorEvent event, Light light, Room room) {
+        if (light.getId().equals(event.getObjectId())) {
+            if (event.getType() == LIGHT_ON) {
+                new EventComplexHandler(light, room, true, "Light ", " in room ", " was turned on.").eventHandle();
+            } else {
+                new EventComplexHandler(light, room, false, "Light ", " in room ", " was turned off.").eventHandle();
+            }
         }
     }
 }

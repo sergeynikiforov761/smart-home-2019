@@ -1,26 +1,24 @@
 package ru.sbt.mipt.oop;
 
-import java.util.function.Function;
 
-public class Light implements HomeComponent {
+import java.util.function.BiFunction;
+
+
+public class Light implements HomeComponent, Actionable {
+    private final String id;
     // this field show current status of the light (off/on)
     private boolean status;
-    private final String id;
 
     public Light(String id, boolean isOn) {
         this.id = id;
         this.status = isOn;
     }
 
-    public boolean isOn() {
-        return status;
-    }
-
     public String getId() {
         return id;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return status;
     }
 
@@ -28,4 +26,9 @@ public class Light implements HomeComponent {
         this.status = status;
     }
 
+
+    @Override
+    public void execute(BiFunction<Object, Room, Void> function) {
+
+    }
 }

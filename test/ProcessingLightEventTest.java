@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class ProcessingLightEventTest {
     @Test
-    public void ProcessingLightEvent() {
+    public void ProcessingLightEventOn() {
         SmartHome smartHome = new SmartHome();
 
         String lightIdFirst = "1";
@@ -30,6 +30,20 @@ public class ProcessingLightEventTest {
 
         Assert.assertTrue(lightFirst.getStatus());
         Assert.assertTrue(lightSecond.getStatus());
+    }
+
+    @Test
+    public void ProcessingLightEventOff() {
+        SmartHome smartHome = new SmartHome();
+
+        String lightIdFirst = "1";
+        Light lightFirst = new Light(lightIdFirst, true);
+
+        String lightIdSecond = "2";
+        Light lightSecond = new Light(lightIdSecond, false);
+
+        smartHome.addRoom(new Room(Arrays.asList(lightFirst), Collections.emptyList(), "lightFirst"));
+        smartHome.addRoom(new Room(Arrays.asList(lightSecond), Collections.emptyList(), "lightSecond"));
 
         SensorEvent newEventFirst = new SensorEvent(SensorEventType.LIGHT_OFF, lightIdFirst);
         SensorEvent newEventSecond = new SensorEvent(SensorEventType.LIGHT_OFF, lightIdSecond);
@@ -42,5 +56,6 @@ public class ProcessingLightEventTest {
 
         Assert.assertFalse(lightFirst.getStatus());
         Assert.assertFalse(lightSecond.getStatus());
+
     }
 }

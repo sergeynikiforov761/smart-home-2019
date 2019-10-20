@@ -15,23 +15,27 @@ public class ProcessingDoorEvent implements ProcessingEvent {
 
     @Override
     public void processEvent() {
-        if (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED) {
-            // событие от двери
-            new DoorIterator(smartHome).actIterator((door, room) -> {
-                if (door.getId().equals(event.getObjectId())) {
-                    if (event.getType() == DOOR_OPEN) {
-                        new EventComplexHandler(door, room, true, "Door ", " in room ", " was opened.").eventHandle();
-                    } else {
-                        new EventComplexHandler(door, room, false, "Door ", " in room ", " was closed.").eventHandle();
-                        // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
+        smartHome.execute((object, room) -> {
+                    if (event.getType() == DOOR_CLOSED || event.getType() == DOOR_OPEN) {
+                        if (object instanceof Door) {
+                            Door door = (Door) object;
+                            updateDoorState(event, door, room);
+                        }
                     }
+                    return null;
                 }
-                return null;
-            });
+        );
+    }
+
+    private void updateDoorState(SensorEvent event, Door door, Room room) {
+        if (door.getId().equals(event.getObjectId())) {
+            if (event.getType() == DOOR_OPEN) {
+                new EventComplexHandler(door, room, true, "Door ", " in room ", " was opened.").eventHandle();
+            } else {
+                new EventComplexHandler(door, room, false, "Door ", " in room ", " was closed.").eventHandle();
+                // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
+            }
         }
     }
 
-    /*
-
-     */
 }

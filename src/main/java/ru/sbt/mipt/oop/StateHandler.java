@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import java.util.Collection;
+
 public class StateHandler {
 
     private SensorEvent event;
@@ -12,7 +14,8 @@ public class StateHandler {
 
     public void stateHandle() {
         while (event != null) {
-            event = MainFunction.processing(event, smartHome);
+            Collection<ProcessingEvent> processingEvents = new ProcessingEventCreator(event, smartHome).processingEventCreate();
+            event = new MainFunction(event, processingEvents).processing();
         }
     }
 }
