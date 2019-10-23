@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop;
 
 public class Light implements HomeComponent {
+    private final String id;
     // this field show current status of the light (off/on)
     private boolean status;
-    private final String id;
 
     public Light(String id, boolean isOn) {
         this.id = id;
