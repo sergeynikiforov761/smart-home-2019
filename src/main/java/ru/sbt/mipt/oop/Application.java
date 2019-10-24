@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.alarm.DeactivationState;
+
 public class Application {
 
     public static void main(String... args) {
@@ -9,6 +12,6 @@ public class Application {
         // начинаем цикл обработки событий
         NextEvent<SensorEvent> sensorEvent = new NextSensorEvent();
         SensorEvent event = sensorEvent.getNextEvent();
-        new StateHandler(event, smartHome).stateHandle();
+        new StateHandler(event, smartHome, new Alarm(new DeactivationState(), "1234")).stateHandle();
     }
 }

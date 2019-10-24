@@ -27,6 +27,7 @@ public class ProcessingDoorEvent implements ProcessingEvent {
         );
     }
 
+
     private void updateDoorState(SensorEvent event, Door door, Room room) {
         if (door.getId().equals(event.getObjectId())) {
             if (event.getType() == DOOR_OPEN) {

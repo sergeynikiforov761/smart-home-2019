@@ -1,21 +1,25 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.alarm.Alarm;
+
 import java.util.Collection;
 
 public class StateHandler {
 
     private SensorEvent event;
     private SmartHome smartHome;
+    private Alarm alarm;
 
-    public StateHandler(SensorEvent event, SmartHome smartHome) {
+    public StateHandler(SensorEvent event, SmartHome smartHome, Alarm alarm) {
         this.event = event;
         this.smartHome = smartHome;
+        this.alarm = alarm;
     }
 
     public void stateHandle() {
         while (event != null) {
             Collection<ProcessingEvent> processingEvents = new ProcessingEventCreator(event, smartHome).processingEventCreate();
-            event = new MainFunction(event, processingEvents).processing();
+            event = new MainFunction(event, processingEvents, alarm).processing();
         }
     }
 }
