@@ -36,7 +36,7 @@ public class Alarm implements State {
         }
     }
 
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 }
