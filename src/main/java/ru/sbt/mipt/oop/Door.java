@@ -1,11 +1,12 @@
 package ru.sbt.mipt.oop;
 
-public class Door {
+public class Door implements HomeComponent {
     private final String id;
-    private boolean isOpen;
+    // this field show current status of the door (closed/open)
+    private boolean status;
 
-    public Door(boolean isOpen, String id) {
-        this.isOpen = isOpen;
+    public Door(boolean status, String id) {
+        this.status = status;
         this.id = id;
     }
 
@@ -13,7 +14,7 @@ public class Door {
         return id;
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
