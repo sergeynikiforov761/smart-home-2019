@@ -21,9 +21,12 @@ public class ProcessingLightEvent implements ProcessingEvent {
                 for (Light light : room.getLights()) {
                     if (light.getId().equals(event.getObjectId())) {
                         if (event.getType() == LIGHT_ON) {
-                            new EventComplexHandler(light, room, true, "Light ", " in room ", " was turned on.").eventHandle();
+                            light.setStatus(true);
+                            System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
                         } else {
-                            new EventComplexHandler(light, room, false, "Light ", " in room ", " was turned off.").eventHandle();
+                            light.setStatus(false);
+                            System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
+
                         }
                     }
                 }

@@ -7,7 +7,7 @@ public class Application {
         Reader<SmartHome> jsonReader = new JsonReaderSmartHome("smart-home-1.js");
         SmartHome smartHome = jsonReader.read();
         // начинаем цикл обработки событий
-        NextEvent<SensorEvent> sensorEvent = new NextSensorEvent();
+        NextEventGetter<SensorEvent> sensorEvent = new NextSensorEvent();
         SensorEvent event = sensorEvent.getNextEvent();
         new StateHandler(event, smartHome).stateHandle();
     }

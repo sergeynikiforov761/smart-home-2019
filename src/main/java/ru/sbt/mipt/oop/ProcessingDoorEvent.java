@@ -21,9 +21,11 @@ public class ProcessingDoorEvent implements ProcessingEvent {
                 for (Door door : room.getDoors()) {
                     if (door.getId().equals(event.getObjectId())){
                         if (event.getType() == DOOR_OPEN) {
-                            new EventComplexHandler(door, room,true, "Door "," in room "," was opened.").eventHandle();
+                            door.setStatus(true);
+                            System.out.println("Door " + door.getId() + " in room " + room.getName() + " was opened.");
                         } else {
-                            new EventComplexHandler(door, room, false, "Door ", " in room ", " was closed.").eventHandle();
+                            door.setStatus(false);
+                            System.out.println("Door " + door.getId() + " in room " + room.getName() + " was closed.");
                             // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
                         }
                     }

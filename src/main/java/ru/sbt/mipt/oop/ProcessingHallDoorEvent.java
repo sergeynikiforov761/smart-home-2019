@@ -24,7 +24,9 @@ public class ProcessingHallDoorEvent implements ProcessingEvent {
                             if (room.getName().equals("hall")) {
                                 for (Room homeRoom : smartHome.getRooms()) {
                                     for (Light light : homeRoom.getLights()) {
-                                        new EventSimpleHandler<>(light, false, "Pretent we're sending command ", new SensorCommand(CommandType.LIGHT_OFF, light.getId()));
+                                        light.setStatus(false);
+                                        SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
+                                        System.out.println("Pretent we're sending command " + command);
                                     }
                                 }
                             }

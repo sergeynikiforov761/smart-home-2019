@@ -1,5 +1,5 @@
 package ru.sbt.mipt.oop;
 
-public interface NextEvent<T> {
+public interface NextEventGetter<T> {
     T getNextEvent();
 }
