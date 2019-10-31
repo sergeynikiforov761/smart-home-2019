@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-import java.util.function.BiFunction;
+import ru.sbt.mipt.oop.actions.Action;
 
 public class Door implements HomeComponent, Actionable {
     private final String id;
@@ -25,6 +25,8 @@ public class Door implements HomeComponent, Actionable {
     }
 
     @Override
-    public void execute(BiFunction<Object, Room, Void> function) {
+    public void execute(Action action) {
+        action.updateComponent(this);
+        action.act();
     }
 }

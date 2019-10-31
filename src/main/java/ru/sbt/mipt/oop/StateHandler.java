@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEventCreator;
+
 import java.util.Collection;
 
 public class StateHandler {

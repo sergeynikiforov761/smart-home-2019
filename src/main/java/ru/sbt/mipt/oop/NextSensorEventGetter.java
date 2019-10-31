@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop;
 
-public class NextSensorEvent implements NextEvent<SensorEvent> {
+public class NextSensorEventGetter implements NextEventGetter<SensorEvent> {
 
     @Override
     public SensorEvent getNextEvent() {

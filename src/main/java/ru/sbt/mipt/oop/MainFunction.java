@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
+
 import java.util.Collection;
 
 public class MainFunction {
@@ -16,6 +18,6 @@ public class MainFunction {
         for (ProcessingEvent processingEvent : processingEvents) {
             processingEvent.processEvent();
         }
-        return new NextSensorEvent().getNextEvent();
+        return new NextSensorEventGetter().getNextEvent();
     }
 }

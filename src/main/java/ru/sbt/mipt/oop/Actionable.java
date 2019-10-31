@@ -1,9 +1,8 @@
 package ru.sbt.mipt.oop;
 
 
-import java.util.function.BiFunction;
-
+import ru.sbt.mipt.oop.actions.Action;
 
 public interface Actionable {
-    void execute(BiFunction<Object, Room, Void> function);
+    void execute(Action action);
 }
