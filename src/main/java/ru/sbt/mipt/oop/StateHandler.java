@@ -1,6 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEventCreator;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.util.Collection;
 
@@ -16,6 +19,11 @@ public class StateHandler {
         this.alarm = alarm;
     }
 
+    public StateHandler(SmartHome smartHome, Alarm alarm) {
+        this.smartHome = smartHome;
+        this.alarm = alarm;
+    }
+
     public void stateHandle() {
         while (event != null) {
             Collection<ProcessingEvent> processingEvents = new ProcessingEventCreator(event, smartHome).processingEventCreate();
@@ -23,3 +31,4 @@ public class StateHandler {
         }
     }
 }
+

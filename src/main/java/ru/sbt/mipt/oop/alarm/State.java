@@ -1,7 +1,9 @@
 package ru.sbt.mipt.oop.alarm;
 
 public interface State {
-    State act(boolean status, AlarmType type);
+    // State act(boolean status, AlarmType type);
+    void activate(String code);
 
-    AlarmType getClassAvailability();
+    void deactivate(String code);
+    // AlarmType getClassAvailability();
 }

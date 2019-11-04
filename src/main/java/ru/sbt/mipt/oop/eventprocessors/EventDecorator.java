@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.eventprocessors;
 
 
 import ru.sbt.mipt.oop.alarm.Alarm;
@@ -16,12 +16,13 @@ public class EventDecorator {
     }
 
     public void processEvent() {
-        if (alarm.getClassAvailability() == AlarmType.DEACTIVATION) {
+        if (alarm.getType() == AlarmType.DEACTIVATION) {
             processingEvent.processEvent();
-        } else if (alarm.getClassAvailability() == AlarmType.ALARM) {
+        } else if (alarm.getType() == AlarmType.ALARM) {
             System.out.println("Alarm");
         } else {
-            alarm.changeState(new AlarmState(), alarm.getCode());
+            // продумать логику активации/деактивации
+            alarm.deactivate("123");
         }
     }
 }

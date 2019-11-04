@@ -2,18 +2,18 @@ package ru.sbt.mipt.oop.alarm;
 
 public enum AlarmType {
     ACTIVATION {
-        public State getState() {
-            return new ActivationState();
+        public State getState(Alarm alarm) {
+            return new ActivationState(alarm);
         }
     }, DEACTIVATION {
-        public State getState() {
-            return new DeactivationState();
+        public State getState(Alarm alarm) {
+            return new DeactivationState(alarm);
         }
     }, ALARM {
-        public State getState() {
-            return new AlarmState();
+        public State getState(Alarm alarm) {
+            return new AlarmState(alarm);
         }
     };
 
-    public abstract State getState();
+    public abstract State getState(Alarm alarm);
 }

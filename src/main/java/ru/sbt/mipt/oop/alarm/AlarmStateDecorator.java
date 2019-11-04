@@ -7,7 +7,11 @@ public class AlarmStateDecorator {
         this.state = state;
     }
 
-    public AlarmType getClassAvailability() {
-        return state.getClassAvailability();
+    public void activate(String code) {
+        state.activate(code);
+    }
+
+    public void deactivate(String code) {
+        state.deactivate(code);
     }
 }

@@ -1,6 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingDoorEvent;
+import ru.sbt.mipt.oop.homeelements.Door;
+import ru.sbt.mipt.oop.homeelements.Room;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.util.Arrays;
 import java.util.Collections;

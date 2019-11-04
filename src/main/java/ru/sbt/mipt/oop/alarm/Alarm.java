@@ -5,25 +5,14 @@ public class Alarm implements State {
     private State state;
     private String code;
 
-    public Alarm(State state, String code) {
-        this.state = state;
+    public Alarm(String code) {
+        this.state = new DeactivationState(this);
         this.code = code;
     }
 
-    @Override
-    public State act(boolean status, AlarmType type) {
-        return state.act(status, type);
-    }
 
-    @Override
-    public AlarmType getClassAvailability() {
-        return new AlarmStateDecorator(state).getClassAvailability();
-    }
-
-    public void changeState(State state, String code) {
-        AlarmType currentType = getType();
+    public void changeState(State state) {
         this.state = state;
-        this.state = act(this.code.equals(code), currentType);
     }
 
     public AlarmType getType() {
@@ -38,5 +27,15 @@ public class Alarm implements State {
 
     public String getCode() {
         return code;
+    }
+
+    @Override
+    public void activate(String code) {
+        new AlarmStateDecorator(state).activate(code);
+    }
+
+    @Override
+    public void deactivate(String code) {
+        new AlarmStateDecorator(state).deactivate(code);
     }
 }

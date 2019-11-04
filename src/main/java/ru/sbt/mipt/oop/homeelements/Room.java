@@ -1,7 +1,9 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.homeelements;
+
+import ru.sbt.mipt.oop.actions.Action;
+import ru.sbt.mipt.oop.actions.Actionable;
 
 import java.util.Collection;
-import java.util.function.BiFunction;
 
 public class Room implements Actionable {
     private Collection<Light> lights;
@@ -28,12 +30,13 @@ public class Room implements Actionable {
 
 
     @Override
-    public void execute(BiFunction<Object, Room, Void> function) {
+    public void execute(Action action) {
+        action.updateComponent(this);
         for (Light light : lights) {
-            function.apply(light, this);
+            light.execute(action);
         }
         for (Door door : doors) {
-            function.apply(door, this);
+            door.execute(action);
         }
     }
 }

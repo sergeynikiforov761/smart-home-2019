@@ -1,9 +1,13 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingHallDoorEvent;
+import ru.sbt.mipt.oop.homeelements.Door;
+import ru.sbt.mipt.oop.homeelements.Light;
+import ru.sbt.mipt.oop.homeelements.Room;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class ProcessingHallDoorEventTest {
     @Test

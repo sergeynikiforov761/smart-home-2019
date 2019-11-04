@@ -1,17 +1,19 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.DeactivationState;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Application {
 
+    private static final Logger logger = LogManager.getLogger(Application.class);
+
     public static void main(String... args) {
         // считываем состояние дома из файла
-        Reader<SmartHome> jsonReader = new JsonReaderSmartHome("smart-home-1.js");
-        SmartHome smartHome = jsonReader.read();
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigurationFile.class);
+        StateHandler stateHandler = context.getBean(StateHandler.class);
+        stateHandler.stateHandle();
         // начинаем цикл обработки событий
-        NextEvent<SensorEvent> sensorEvent = new NextSensorEvent();
-        SensorEvent event = sensorEvent.getNextEvent();
-        new StateHandler(event, smartHome, new Alarm(new DeactivationState(), "1234")).stateHandle();
     }
 }

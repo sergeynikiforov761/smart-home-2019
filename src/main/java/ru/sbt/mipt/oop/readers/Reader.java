@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.readers;
 
 public interface Reader<T> {
     T read();
