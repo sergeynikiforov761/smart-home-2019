@@ -1,13 +1,19 @@
 package ru.sbt.mipt.oop.alarm;
 
-public class AlarmStateDecorator {
-    private State state;
+public class AlarmStateDecorator implements AlarmState{
+    private AlarmState alarmState;
 
-    public AlarmStateDecorator(State state) {
-        this.state = state;
+    public AlarmStateDecorator(AlarmState state) {
+        this.alarmState = state;
     }
 
-    public AlarmType getClassAvailability() {
-        return state.getClassAvailability();
+    @Override
+    public void activate(String code) {
+        alarmState.activate(code);
+    }
+
+    @Override
+    public void deactivate(String code) {
+        alarmState.deactivate(code);
     }
 }

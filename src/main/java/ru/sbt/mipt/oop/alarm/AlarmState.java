@@ -1,16 +1,8 @@
 package ru.sbt.mipt.oop.alarm;
 
-public class AlarmState implements State {
+public interface AlarmState {
 
-    @Override
-    public State act(boolean status, AlarmType type) {
-        if (!status) {
-            return type.getState();
-        } else return this;
-    }
+    void activate(String code);
 
-    @Override
-    public AlarmType getClassAvailability() {
-        return AlarmType.ALARM;
-    }
+    void deactivate(String code);
 }

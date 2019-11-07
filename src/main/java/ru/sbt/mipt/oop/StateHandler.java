@@ -1,6 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEventCreator;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.util.Collection;
 

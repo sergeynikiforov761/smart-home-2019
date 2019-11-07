@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.alarm.ActivationState;
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.AlarmProcessor;
-import ru.sbt.mipt.oop.alarm.AlarmType;
+import ru.sbt.mipt.oop.alarm.DeactivationAlarmState;
+import ru.sbt.mipt.oop.eventprocessors.EventDecorator;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
 
 import java.util.Collection;
 
@@ -21,12 +21,12 @@ public class MainFunction {
     public SensorEvent processing() {
         System.out.println("Got event: " + event);
         for (ProcessingEvent processingEvent : processingEvents) {
-            new AlarmProcessor(processingEvent, alarm).act();
+            new EventDecorator(processingEvent, alarm).processEvent();
             // здесь можно прописать логику смены статуса/пароля сигнализации
-            if (alarm.getClassAvailability() == AlarmType.DEACTIVATION) {
-                alarm.changeState(new ActivationState(), "1234");
+            if (alarm.getState() instanceof DeactivationAlarmState) {
+                alarm.activate("1234");
             }
         }
-        return new NextSensorEvent().getNextEvent();
+        return new NextSensorEventGetter().getNextEvent();
     }
 }
