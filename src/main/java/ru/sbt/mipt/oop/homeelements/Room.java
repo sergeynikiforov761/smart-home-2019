@@ -31,7 +31,7 @@ public class Room implements Actionable {
 
     @Override
     public void execute(Action action) {
-        action.updateComponent(this);
+        action.act(this);
         for (Light light : lights) {
             light.execute(action);
         }

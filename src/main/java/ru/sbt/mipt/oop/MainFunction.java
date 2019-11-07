@@ -1,8 +1,7 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.alarm.ActivationState;
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.AlarmType;
+import ru.sbt.mipt.oop.alarm.DeactivationAlarmState;
 import ru.sbt.mipt.oop.eventprocessors.EventDecorator;
 import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
 
@@ -24,7 +23,7 @@ public class MainFunction {
         for (ProcessingEvent processingEvent : processingEvents) {
             new EventDecorator(processingEvent, alarm).processEvent();
             // здесь можно прописать логику смены статуса/пароля сигнализации
-            if (alarm.getType() == AlarmType.DEACTIVATION) {
+            if (alarm.getState() instanceof DeactivationAlarmState) {
                 alarm.activate("1234");
             }
         }

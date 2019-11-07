@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SensorEventsManager {
-    private final String[] eventTypes = new String[] { "LightIsOn", "LightIsOff", "DoorIsOpen", "DoorIsClosed", "DoorIsLocked", "DoorIsUnlocked" };
+    private final String[] eventTypes = new String[]{"LightIsOn", "LightIsOff", "DoorIsOpen", "DoorIsClosed", "DoorIsLocked", "DoorIsUnlocked"};
 
     private Collection<EventHandler> handlers = new ArrayList<>();
 
@@ -18,6 +18,7 @@ public class SensorEventsManager {
             for (EventHandler handler : handlers) {
                 handler.handleEvent(event);
             }
+            // генерируется тут
             event = getNextSensorEvent();
         }
     }

@@ -15,7 +15,7 @@ public class JsonReaderSmartHome implements Reader<SmartHome> {
     public SmartHome read() {
         try {
             Gson gson = new Gson();
-            String json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
+            String json = new String(Files.readAllBytes(Paths.get("smart-home-1.json")));
             return gson.fromJson(json, SmartHome.class);
         } catch (IOException error) {
             System.err.println(error);

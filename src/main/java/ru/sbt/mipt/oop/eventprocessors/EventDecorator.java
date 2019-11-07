@@ -2,10 +2,10 @@ package ru.sbt.mipt.oop.eventprocessors;
 
 
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.AlarmState;
-import ru.sbt.mipt.oop.alarm.AlarmType;
+import ru.sbt.mipt.oop.alarm.DangerAlarmState;
+import ru.sbt.mipt.oop.alarm.DeactivationAlarmState;
 
-public class EventDecorator {
+public class EventDecorator implements ProcessingEvent{
 
     private ProcessingEvent processingEvent;
     private Alarm alarm;
@@ -15,10 +15,11 @@ public class EventDecorator {
         this.alarm = alarm;
     }
 
+    @Override
     public void processEvent() {
-        if (alarm.getType() == AlarmType.DEACTIVATION) {
+        if (alarm.getState() instanceof DeactivationAlarmState) {
             processingEvent.processEvent();
-        } else if (alarm.getType() == AlarmType.ALARM) {
+        } else if (alarm.getState() instanceof DangerAlarmState) {
             System.out.println("Alarm");
         } else {
             // продумать логику активации/деактивации
