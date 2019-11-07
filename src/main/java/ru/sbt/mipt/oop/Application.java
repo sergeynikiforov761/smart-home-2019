@@ -1,6 +1,8 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.homeelements.SmartHome;
+import ru.sbt.mipt.oop.readers.JsonReaderSmartHome;
+import ru.sbt.mipt.oop.readers.Reader;
 
 public class Application {
 

@@ -19,7 +19,8 @@ public class StateHandler {
     public void stateHandle() {
         while (event != null) {
             Collection<ProcessingEvent> processingEvents = new ProcessingEventCreator(event, smartHome).processingEventCreate();
-            event = new MainFunction(event, processingEvents).processing();
+            new MainFunction(event, processingEvents).processing();
+            event = new NextSensorEventGetter().getNextEvent();
         }
     }
 }

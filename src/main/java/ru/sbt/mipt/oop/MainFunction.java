@@ -13,11 +13,10 @@ public class MainFunction {
         this.processingEvents = processingEvents;
     }
 
-    public SensorEvent processing() {
+    public void processing() {
         System.out.println("Got event: " + event);
         for (ProcessingEvent processingEvent : processingEvents) {
             processingEvent.processEvent();
         }
-        return new NextSensorEventGetter().getNextEvent();
     }
 }
