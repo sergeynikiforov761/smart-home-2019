@@ -20,9 +20,8 @@ public class EventDecorator implements ProcessingEvent{
         if (alarm.getState() instanceof DeactivationAlarmState) {
             processingEvent.processEvent();
         } else if (alarm.getState() instanceof DangerAlarmState) {
-            System.out.println("Alarm");
+            System.out.println("Sending sms to phone: 8-800-55-35-35");
         } else {
-            // продумать логику активации/деактивации
             alarm.deactivate("123");
         }
     }

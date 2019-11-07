@@ -2,9 +2,13 @@ package ru.sbt.mipt.oop.eventprocessors.adapter;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import com.coolcompany.smarthome.events.EventHandler;
-import ru.sbt.mipt.oop.StateHandler;
+import ru.sbt.mipt.oop.MainFunction;
 import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
+import ru.sbt.mipt.oop.eventprocessors.ProcessingEventCreator;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
+
+import java.util.Collection;
 
 public class AdapterEventHandler implements EventHandler {
 
@@ -20,6 +24,7 @@ public class AdapterEventHandler implements EventHandler {
 
     @Override
     public void handleEvent(CCSensorEvent event) {
-        new StateHandler(adapterStateHandler.toSensorEvent(event), smartHome, alarm).stateHandle();
+        Collection<ProcessingEvent> processingEvents = new ProcessingEventCreator(adapterStateHandler.toSensorEvent(event), smartHome).processingEventCreate();
+        new MainFunction(adapterStateHandler.toSensorEvent(event), processingEvents, alarm).processing();
     }
 }

@@ -18,7 +18,7 @@ public class MainFunction {
         this.alarm = alarm;
     }
 
-    public SensorEvent processing() {
+    public void processing() {
         System.out.println("Got event: " + event);
         for (ProcessingEvent processingEvent : processingEvents) {
             new EventDecorator(processingEvent, alarm).processEvent();
@@ -27,6 +27,6 @@ public class MainFunction {
                 alarm.activate("1234");
             }
         }
-        return new NextSensorEventGetter().getNextEvent();
+
     }
 }

@@ -18,7 +18,6 @@ public class SensorEventsManager {
             for (EventHandler handler : handlers) {
                 handler.handleEvent(event);
             }
-            // генерируется тут
             event = getNextSensorEvent();
         }
     }
