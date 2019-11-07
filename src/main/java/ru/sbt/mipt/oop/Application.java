@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.homeelements.SmartHome;
+
 public class Application {
 
     public static void main(String... args) {

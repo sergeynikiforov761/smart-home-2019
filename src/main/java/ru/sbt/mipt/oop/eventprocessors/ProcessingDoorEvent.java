@@ -1,11 +1,9 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
-import ru.sbt.mipt.oop.Door;
-import ru.sbt.mipt.oop.Room;
 import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SmartHome;
-import ru.sbt.mipt.oop.actions.Action;
-import ru.sbt.mipt.oop.actions.DeviceAction;
+import ru.sbt.mipt.oop.homeelements.Door;
+import ru.sbt.mipt.oop.homeelements.Room;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
@@ -22,19 +20,19 @@ public class ProcessingDoorEvent implements ProcessingEvent {
 
     @Override
     public void processEvent() {
-        Action action = new DeviceAction((objectFirst, objectSecond) -> {
+        smartHome.execute(object -> {
             if (event.getType() == DOOR_CLOSED || event.getType() == DOOR_OPEN) {
-                if (objectSecond instanceof Room) {
-                    Room room = (Room) objectSecond;
-                    if (objectFirst instanceof Door) {
-                        Door door = (Door) objectFirst;
-                        updateDoorState(event, door, room);
-                    }
+                if (object instanceof Room) {
+                    Room room = (Room) object;
+                    room.execute(object_new -> {
+                        if (object_new instanceof Door) {
+                            Door door = (Door) object_new;
+                            updateDoorState(event, door, room);
+                        }
+                    });
                 }
             }
-            return null;
         });
-        smartHome.execute(action);
     }
 
 

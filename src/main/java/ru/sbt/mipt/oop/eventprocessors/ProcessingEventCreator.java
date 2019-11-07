@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
 import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SmartHome;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.util.ArrayList;
 import java.util.Collection;

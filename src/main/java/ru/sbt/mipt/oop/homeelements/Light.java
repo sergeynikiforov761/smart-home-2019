@@ -1,7 +1,9 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.homeelements;
 
 
+import ru.sbt.mipt.oop.HomeComponent;
 import ru.sbt.mipt.oop.actions.Action;
+import ru.sbt.mipt.oop.actions.Actionable;
 
 
 public class Light implements HomeComponent, Actionable {
@@ -29,7 +31,6 @@ public class Light implements HomeComponent, Actionable {
 
     @Override
     public void execute(Action action) {
-        action.updateComponent(this);
-        action.act();
+        action.act(this);
     }
 }

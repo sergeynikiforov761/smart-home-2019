@@ -1,6 +1,7 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.homeelements;
 
 import ru.sbt.mipt.oop.actions.Action;
+import ru.sbt.mipt.oop.actions.Actionable;
 
 import java.util.Collection;
 
@@ -30,7 +31,7 @@ public class Room implements Actionable {
 
     @Override
     public void execute(Action action) {
-        action.updateComponent(this);
+        action.act(this);
         for (Light light : lights) {
             light.execute(action);
         }

@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop;
 
 import com.google.gson.Gson;
+import ru.sbt.mipt.oop.homeelements.SmartHome;
 
 import java.io.IOException;
 import java.nio.file.Files;
