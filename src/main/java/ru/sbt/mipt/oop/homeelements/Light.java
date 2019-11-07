@@ -31,7 +31,6 @@ public class Light implements HomeComponent, Actionable {
 
     @Override
     public void execute(Action action) {
-        action.updateComponent(this);
-        action.act();
+        action.act(this);
     }
 }

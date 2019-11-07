@@ -12,21 +12,22 @@ import static ru.sbt.mipt.oop.SensorEventType.*;
 public class AdapterStateHandler extends StateHandler {
 
     private SensorEventsManager sensorEventsManager = new SensorEventsManager();
-
-    public AdapterStateHandler(SensorEvent event, SmartHome smartHome, Alarm alarm) {
-        super(event, smartHome, alarm);
-    }
+    private SmartHome smartHome;
+    private Alarm alarm;
 
     public AdapterStateHandler(SmartHome smartHome, Alarm alarm) {
         super(smartHome, alarm);
+        this.alarm = alarm;
+        this.smartHome = smartHome;
     }
 
     public void stateHandle() {
-        sensorEventsManager.registerEventHandler(event -> System.out.println(toSensorEvent(event).toString()));
+        sensorEventsManager.registerEventHandler(
+                event -> new AdapterEventHandler(this, smartHome, alarm).handleEvent(event));
         sensorEventsManager.start();
     }
 
-    private SensorEvent toSensorEvent(CCSensorEvent event) {
+    public SensorEvent toSensorEvent(CCSensorEvent event) {
         if (event.getEventType().equals("LightIsOn")) {
             return new SensorEvent(LIGHT_ON, event.getObjectId());
         } else if (event.getEventType().equals("LightIsOff")) {

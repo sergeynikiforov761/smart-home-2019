@@ -21,17 +21,12 @@ public class SpringConfigurationFile {
     }
 
     @Bean
-    SensorEvent sensorEvent() {
-        return new NextSensorEventGetter().getNextEvent();
-    }
-
-    @Bean
     SmartHome smartHome() {
         return reader().read();
     }
 
     @Bean
     StateHandler stateHandler() {
-        return new AdapterStateHandler(sensorEvent(), smartHome(), alarm());
+        return new AdapterStateHandler(smartHome(), alarm());
     }
 }

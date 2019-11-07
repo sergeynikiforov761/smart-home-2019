@@ -1,41 +1,39 @@
 package ru.sbt.mipt.oop.alarm;
 
-public class Alarm implements State {
+public class Alarm implements AlarmState {
 
-    private State state;
+    private AlarmState alarmState;
     private String code;
 
     public Alarm(String code) {
-        this.state = new DeactivationState(this);
+        this.alarmState = new DeactivationAlarmState(this);
         this.code = code;
     }
 
 
-    public void changeState(State state) {
-        this.state = state;
-    }
-
-    public AlarmType getType() {
-        if (this.state instanceof ActivationState) {
-            return AlarmType.ACTIVATION;
-        } else if (this.state instanceof DeactivationState) {
-            return AlarmType.DEACTIVATION;
-        } else {
-            return AlarmType.ALARM;
-        }
+    public void changeState(AlarmState state) {
+        this.alarmState = state;
     }
 
     public String getCode() {
         return code;
     }
 
+    public AlarmState getState(){
+        return alarmState;
+    }
+
+    public void danger() {
+        this.alarmState = new DangerAlarmState(this);
+    }
+
     @Override
     public void activate(String code) {
-        new AlarmStateDecorator(state).activate(code);
+        new AlarmStateDecorator(alarmState).activate(code);
     }
 
     @Override
     public void deactivate(String code) {
-        new AlarmStateDecorator(state).deactivate(code);
+        new AlarmStateDecorator(alarmState).deactivate(code);
     }
 }
