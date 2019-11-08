@@ -3,8 +3,8 @@ package ru.sbt.mipt.oop.alarm;
 public class AlarmStateDecorator implements AlarmState{
     private AlarmState alarmState;
 
-    public AlarmStateDecorator(AlarmState state) {
-        this.alarmState = state;
+    public AlarmStateDecorator(AlarmState alarmState) {
+        this.alarmState = alarmState;
     }
 
     @Override
