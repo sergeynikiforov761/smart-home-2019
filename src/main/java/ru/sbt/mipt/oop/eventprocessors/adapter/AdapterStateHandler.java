@@ -28,14 +28,19 @@ public class AdapterStateHandler extends StateHandler {
     }
 
     public SensorEvent toSensorEvent(CCSensorEvent event) {
-        if (event.getEventType().equals("LightIsOn")) {
-            return new SensorEvent(LIGHT_ON, event.getObjectId());
-        } else if (event.getEventType().equals("LightIsOff")) {
-            return new SensorEvent(LIGHT_OFF, event.getObjectId());
-        } else if (event.getEventType().equals("DoorIsOpen") || event.getEventType().equals("DoorIsUnlocked")) {
-            return new SensorEvent(DOOR_OPEN, event.getObjectId());
-        } else {
-            return new SensorEvent(DOOR_CLOSED, event.getObjectId());
+        switch (event.getEventType()) {
+            case "LightIsOn":
+                return new SensorEvent(LIGHT_ON, event.getObjectId());
+            case "LightIsOff":
+                return new SensorEvent(LIGHT_OFF, event.getObjectId());
+            case "DoorIsOpen":
+            case "DoorIsUnlocked":
+                return new SensorEvent(DOOR_OPEN, event.getObjectId());
+            case "DoorIsClosed":
+            case "DoorIsLocked":
+                return new SensorEvent(DOOR_CLOSED, event.getObjectId());
+            default:
+                return new SensorEvent(null, event.getObjectId());
         }
     }
 }
