@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
+import ru.sbt.mipt.oop.alarm.ActivationAlarmState;
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.DangerAlarmState;
 import ru.sbt.mipt.oop.alarm.DeactivationAlarmState;
 
 public class EventDecorator implements ProcessingEvent{
@@ -18,10 +18,9 @@ public class EventDecorator implements ProcessingEvent{
     public void processEvent() {
         if (alarm.getState() instanceof DeactivationAlarmState) {
             processingEvent.processEvent();
-        } else if (alarm.getState() instanceof DangerAlarmState) {
+        } else if (alarm.getState() instanceof ActivationAlarmState) {
+            alarm.danger();
             System.out.println("Sending sms to phone: 8-800-55-35-35");
-        } else {
-            alarm.deactivate("123");
         }
     }
 }
