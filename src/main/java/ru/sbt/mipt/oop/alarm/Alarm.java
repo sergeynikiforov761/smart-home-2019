@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.alarm;
 
-public class Alarm implements AlarmState {
+public class Alarm {
 
     private AlarmState alarmState;
     private String code;
@@ -19,21 +19,23 @@ public class Alarm implements AlarmState {
         return code;
     }
 
+    public void setCode(String code){
+        this.code = code;
+    }
+
     public AlarmState getState(){
         return alarmState;
     }
 
     public void danger() {
-        this.alarmState = new DangerAlarmState(this);
+        alarmState.danger();
     }
 
-    @Override
     public void activate(String code) {
-        new AlarmStateDecorator(alarmState).activate(code);
+        alarmState.activate(code);
     }
 
-    @Override
     public void deactivate(String code) {
-        new AlarmStateDecorator(alarmState).deactivate(code);
+        alarmState.deactivate(code);
     }
 }
