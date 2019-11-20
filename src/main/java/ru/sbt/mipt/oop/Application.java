@@ -13,6 +13,6 @@ public class Application {
         // начинаем цикл обработки событий
         NextEventGetter<SensorEvent> sensorEvent = new NextSensorEventGetter();
         SensorEvent event = sensorEvent.getNextEvent();
-        new StateHandler(event, smartHome, new Alarm("1234")).stateHandle();
+        new StateHandler(event, smartHome, new Alarm("1")).stateHandle();
     }
 }

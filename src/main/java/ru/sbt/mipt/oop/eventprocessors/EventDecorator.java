@@ -17,9 +17,11 @@ public class EventDecorator implements ProcessingEvent {
 
     @Override
     public void processEvent() {
-        if (alarm.getState() instanceof DeactivationAlarmState) {
+        if (processingEvent instanceof ProcessingAlarmEvent) {
             processingEvent.processEvent();
-            alarm.activate("123");
+        }
+        else if (alarm.getState() instanceof DeactivationAlarmState) {
+            processingEvent.processEvent();
         } else if (alarm.getState() instanceof ActivationAlarmState) {
             alarm.danger();
             System.out.println("Sending sms to phone: 8-800-55-35-35");

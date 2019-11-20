@@ -4,9 +4,8 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.homeelements.Door;
 import ru.sbt.mipt.oop.homeelements.Room;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
-
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
+import ru.sbt.mipt.oop.sensor.DoorEventType;
+import ru.sbt.mipt.oop.sensor.DoorSensorEvent;
 
 public class ProcessingDoorEvent implements ProcessingEvent {
 
@@ -21,13 +20,13 @@ public class ProcessingDoorEvent implements ProcessingEvent {
     @Override
     public void processEvent() {
         smartHome.execute(object -> {
-            if (event.getType() == DOOR_CLOSED || event.getType() == DOOR_OPEN) {
+            if (event instanceof DoorSensorEvent) {
                 if (object instanceof Room) {
                     Room room = (Room) object;
                     room.execute(object_new -> {
                         if (object_new instanceof Door) {
                             Door door = (Door) object_new;
-                            updateDoorState(event, door, room);
+                            updateDoorState((DoorSensorEvent) event, door, room);
                         }
                     });
                 }
@@ -36,9 +35,9 @@ public class ProcessingDoorEvent implements ProcessingEvent {
     }
 
 
-    private void updateDoorState(SensorEvent event, Door door, Room room) {
+    private void updateDoorState(DoorSensorEvent event, Door door, Room room) {
         if (door.getId().equals(event.getObjectId())) {
-            if (event.getType() == DOOR_OPEN) {
+            if (event.getType() == DoorEventType.DOOR_OPEN) {
                 door.setStatus(true);
                 System.out.println("Door " + door.getId() + " in room " + room.getName() + " was opened.");
             } else {
