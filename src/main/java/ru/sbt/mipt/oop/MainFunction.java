@@ -19,8 +19,11 @@ public class MainFunction {
 
     public void processing() {
         System.out.println("Got event: " + event);
+        EventDecorator eventDecorator = new EventDecorator();
+        eventDecorator.eventChange(event);
         for (ProcessingEvent processingEvent : processingEvents) {
-            new EventDecorator(processingEvent, alarm).processEvent();
+            eventDecorator.changeEventAndAlarm(processingEvent, alarm);
+            eventDecorator.processEvent();
         }
     }
 }
