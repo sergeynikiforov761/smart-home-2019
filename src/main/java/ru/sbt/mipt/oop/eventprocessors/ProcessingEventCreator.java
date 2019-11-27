@@ -22,10 +22,10 @@ public class ProcessingEventCreator {
 
     public Collection<ProcessingEvent> processingEventCreate() {
         Collection<ProcessingEvent> processingEvents = new ArrayList<>();
-        processingEvents.add(new ProcessingLightEvent(event, smartHome));
-        processingEvents.add(new ProcessingDoorEvent(event, smartHome));
-        processingEvents.add(new ProcessingHallDoorEvent(event, smartHome));
-        processingEvents.add(new ProcessingAlarmEvent(event, alarm));
+        processingEvents.add(new ProcessingLightEvent(smartHome));
+        processingEvents.add(new ProcessingDoorEvent(smartHome));
+        processingEvents.add(new ProcessingHallDoorEvent(smartHome));
+        processingEvents.add(new ProcessingAlarmEvent(alarm));
         return processingEvents;
     }
 

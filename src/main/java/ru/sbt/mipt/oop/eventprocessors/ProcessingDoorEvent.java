@@ -9,16 +9,14 @@ import ru.sbt.mipt.oop.sensor.DoorSensorEvent;
 
 public class ProcessingDoorEvent implements ProcessingEvent {
 
-    private SensorEvent event;
     private SmartHome smartHome;
 
-    public ProcessingDoorEvent(SensorEvent event, SmartHome smartHome) {
-        this.event = event;
+    public ProcessingDoorEvent(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
     @Override
-    public void processEvent() {
+    public void processEvent(SensorEvent event) {
         smartHome.execute(object -> {
             if (event instanceof DoorSensorEvent) {
                 if (object instanceof Room) {

@@ -4,50 +4,36 @@ package ru.sbt.mipt.oop.eventprocessors;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.alarm.ActivationAlarmState;
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.alarm.DeactivationAlarmState;
+import ru.sbt.mipt.oop.alarm.DangerAlarmState;
+import ru.sbt.mipt.oop.sensor.AlarmSensorEvent;
+
+import static ru.sbt.mipt.oop.sensor.AlarmEventType.ALARM_DEACTIVATE;
 
 public class EventDecorator implements ProcessingEvent {
 
-    private ProcessingEvent processingEvent;
+    private EventProcessor eventProcessor;
     private Alarm alarm;
-    private SensorEvent event;
-    private boolean flag;
 
-    public EventDecorator(ProcessingEvent processingEvent, Alarm alarm) {
-        this.processingEvent = processingEvent;
+    public EventDecorator(EventProcessor processingEvent, Alarm alarm) {
+        this.eventProcessor = processingEvent;
         this.alarm = alarm;
-    }
-
-    public EventDecorator() {}
-
-    public void changeEventAndAlarm(ProcessingEvent processingEvent, Alarm alarm){
-        this.processingEvent = processingEvent;
-        this.alarm = alarm;
-    }
-
-    public void eventChange(SensorEvent event){
-        this.event = event;
-        this.flag = true;
     }
 
     @Override
-    public void processEvent() {
-        if (processingEvent instanceof ProcessingAlarmEvent) {
-            processingEvent.processEvent();
-        }
-        else if (alarm.getState() instanceof DeactivationAlarmState) {
-            processingEvent.processEvent();
-        } else if (alarm.getState() instanceof ActivationAlarmState) {
+    public void processEvent(SensorEvent event) {
+        System.out.println("Got event: " + event);
+        if (alarm.getState() instanceof ActivationAlarmState) {
             alarm.danger();
-            if(flag){
-                System.out.println("Sending sms to phone: 8-800-55-35-35");
-                flag = false;
-            }
+        } else if (alarm.getState() instanceof DangerAlarmState) {
+            processAlarmState(event);
+        } else eventProcessor.processEvent(event);
+    }
+
+    private void processAlarmState(SensorEvent event) {
+        if (event instanceof AlarmSensorEvent && ((AlarmSensorEvent) event).getType() == ALARM_DEACTIVATE) {
+            eventProcessor.processEvent(event);
         } else {
-            if(flag){
-                System.out.println("Sending sms to phone: 8-800-55-35-35");
-                flag = false;
-            }
+            System.out.println("Sending sms to phone: 8-800-55-35-35");
         }
     }
 }

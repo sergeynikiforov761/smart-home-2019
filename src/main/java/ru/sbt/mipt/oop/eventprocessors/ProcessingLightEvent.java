@@ -7,21 +7,16 @@ import ru.sbt.mipt.oop.homeelements.SmartHome;
 import ru.sbt.mipt.oop.sensor.LightEventType;
 import ru.sbt.mipt.oop.sensor.LightSensorEvent;
 
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
-
 public class ProcessingLightEvent implements ProcessingEvent {
 
-    private SensorEvent event;
     private SmartHome smartHome;
 
-    public ProcessingLightEvent(SensorEvent event, SmartHome smartHome) {
-        this.event = event;
+    public ProcessingLightEvent(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
     @Override
-    public void processEvent() {
+    public void processEvent(SensorEvent event) {
         smartHome.execute(object -> {
             if (event instanceof LightSensorEvent) {
                 if (object instanceof Room) {

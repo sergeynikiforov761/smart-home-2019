@@ -14,16 +14,14 @@ import ru.sbt.mipt.oop.sensor.DoorSensorEvent;
 
 public class ProcessingHallDoorEvent implements ProcessingEvent {
 
-    private SensorEvent event;
     private SmartHome smartHome;
 
-    public ProcessingHallDoorEvent(SensorEvent event, SmartHome smartHome) {
-        this.event = event;
+    public ProcessingHallDoorEvent(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
     @Override
-    public void processEvent() {
+    public void processEvent(SensorEvent event) {
         // в этом случае мы хотим автоматически выключить свет во всем доме (это же умный дом!)
         smartHome.execute((object) -> {
             if (event instanceof DoorSensorEvent) {
@@ -31,7 +29,7 @@ public class ProcessingHallDoorEvent implements ProcessingEvent {
                     if (object instanceof Room) {
                         Room room = (Room) object;
                         if (room.getName().equals("hall")) {
-                            room.execute((object_new) -> UpdateDoorState(room, object_new));
+                            room.execute((object_new) -> UpdateDoorState(room, object_new, event));
                         }
                     }
                 }
@@ -39,7 +37,7 @@ public class ProcessingHallDoorEvent implements ProcessingEvent {
         });
     }
 
-    private void UpdateDoorState(Room room, Actionable object_new) {
+    private void UpdateDoorState(Room room, Actionable object_new, SensorEvent event) {
         if (object_new instanceof Door) {
             Door door = (Door) object_new;
             if (door.getId().equals(((DoorSensorEvent)event).getObjectId())) {
