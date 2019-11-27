@@ -4,30 +4,27 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.homeelements.Light;
 import ru.sbt.mipt.oop.homeelements.Room;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
-
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
+import ru.sbt.mipt.oop.sensor.LightEventType;
+import ru.sbt.mipt.oop.sensor.LightSensorEvent;
 
 public class ProcessingLightEvent implements ProcessingEvent {
 
-    private SensorEvent event;
     private SmartHome smartHome;
 
-    public ProcessingLightEvent(SensorEvent event, SmartHome smartHome) {
-        this.event = event;
+    public ProcessingLightEvent(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
     @Override
-    public void processEvent() {
+    public void processEvent(SensorEvent event) {
         smartHome.execute(object -> {
-            if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
+            if (event instanceof LightSensorEvent) {
                 if (object instanceof Room) {
                     Room room = (Room) object;
                     room.execute((objectNew) -> {
                         if (objectNew instanceof Light) {
                             Light light = (Light) objectNew;
-                            updateLightState(event, light, room);
+                            updateLightState((LightSensorEvent) event, light, room);
                         }
                     });
                 }
@@ -35,9 +32,9 @@ public class ProcessingLightEvent implements ProcessingEvent {
         });
     }
 
-    private void updateLightState(SensorEvent event, Light light, Room room) {
+    private void updateLightState(LightSensorEvent event, Light light, Room room) {
         if (light.getId().equals(event.getObjectId())) {
-            if (event.getType() == LIGHT_ON) {
+            if (event.getType() == LightEventType.LIGHT_OFF) {
                 light.setStatus(true);
                 System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
             } else {

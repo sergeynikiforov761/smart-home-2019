@@ -4,7 +4,7 @@ import ru.sbt.mipt.oop.homeelements.Door;
 import ru.sbt.mipt.oop.homeelements.Room;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
 
-public class HallDoorClosed implements EventAction{
+public class HallDoorClosed implements Command {
     private SmartHome smartHome;
 
     public HallDoorClosed(SmartHome smartHome) {

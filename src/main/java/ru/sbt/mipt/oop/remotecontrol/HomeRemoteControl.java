@@ -1,26 +1,25 @@
 package ru.sbt.mipt.oop.remotecontrol;
 
-import ru.sbt.mipt.oop.remotecontrol.remotecontrolevents.EventAction;
+import ru.sbt.mipt.oop.remotecontrol.remotecontrolevents.Command;
 
 import java.util.HashMap;
 
 public class HomeRemoteControl implements RemoteControl {
-    private String rcId;
-    private HashMap<Buttons, EventAction> remoteControls = new HashMap<>();
+    private HashMap<String, Command> remoteControls;
 
-    public HomeRemoteControl(String rcId) {
-        this.rcId = rcId;
+    public HomeRemoteControl() {
+        this.remoteControls = new HashMap<>();
     }
 
 
     @Override
-    public void onButtonPressed(Buttons buttonCode, String rcId) {
-        if (rcId.equals(this.rcId) && remoteControls.containsKey(buttonCode)) {
+    public void onButtonPressed(String buttonCode) {
+        if (remoteControls.containsKey(buttonCode)) {
             remoteControls.get(buttonCode).execute();
         }
     }
 
-    public void addRemoteControl(Buttons button, EventAction eventAction){
-        remoteControls.put(button,eventAction);
+    public void addRemoteControl(String button, Command command) {
+        remoteControls.put(button, command);
     }
 }

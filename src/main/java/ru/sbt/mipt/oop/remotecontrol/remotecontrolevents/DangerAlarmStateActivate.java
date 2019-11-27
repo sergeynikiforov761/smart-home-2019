@@ -2,11 +2,11 @@ package ru.sbt.mipt.oop.remotecontrol.remotecontrolevents;
 
 import ru.sbt.mipt.oop.alarm.Alarm;
 
-public class AlarmStateActivate implements EventAction{
+public class DangerAlarmStateActivate implements Command {
 
     private Alarm alarm;
 
-    public AlarmStateActivate(Alarm alarm) {
+    public DangerAlarmStateActivate(Alarm alarm) {
         this.alarm = alarm;
     }
 

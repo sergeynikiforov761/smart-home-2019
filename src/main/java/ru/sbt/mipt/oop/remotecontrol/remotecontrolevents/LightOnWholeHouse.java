@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop.remotecontrol.remotecontrolevents;
 import ru.sbt.mipt.oop.homeelements.Light;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
 
-public class LightOnWholeHouse implements EventAction {
+public class LightOnWholeHouse implements Command {
 
     private SmartHome smartHome;
 

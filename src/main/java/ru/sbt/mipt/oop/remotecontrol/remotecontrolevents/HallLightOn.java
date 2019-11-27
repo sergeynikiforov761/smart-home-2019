@@ -4,7 +4,7 @@ import ru.sbt.mipt.oop.homeelements.Light;
 import ru.sbt.mipt.oop.homeelements.Room;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
 
-public class HallLightOn implements EventAction{
+public class HallLightOn implements Command {
     private SmartHome smartHome;
 
     public HallLightOn(SmartHome smartHome) {
