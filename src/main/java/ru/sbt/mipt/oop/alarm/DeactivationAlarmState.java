@@ -10,15 +10,17 @@ public class DeactivationAlarmState implements AlarmState {
 
     @Override
     public void activate(String code) {
-        if (alarm.getCode().equals(code)) {
-            alarm.changeState(new ActivationAlarmState(alarm));
-        }
+        alarm.setCode(code);
+        alarm.changeState(new ActivationAlarmState(alarm));
+
     }
 
     @Override
     public void deactivate(String code) {
-        if (!alarm.getCode().equals(code)) {
-            alarm.changeState(new DangerAlarmState(alarm));
-        }
+    }
+
+    @Override
+    public void danger() {
+        alarm.changeState(new DangerAlarmState(alarm));
     }
 }

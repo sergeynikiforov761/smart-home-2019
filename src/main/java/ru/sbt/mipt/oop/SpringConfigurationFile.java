@@ -1,18 +1,55 @@
 package ru.sbt.mipt.oop;
 
+import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.sbt.mipt.oop.alarm.Alarm;
-import ru.sbt.mipt.oop.eventprocessors.adapter.AdapterStateHandler;
+import ru.sbt.mipt.oop.eventprocessors.*;
+import ru.sbt.mipt.oop.eventprocessors.adapter.AdapterEventHandler;
+import ru.sbt.mipt.oop.eventprocessors.adapter.converters.*;
 import ru.sbt.mipt.oop.homeelements.SmartHome;
 import ru.sbt.mipt.oop.readers.JsonReaderSmartHome;
-import ru.sbt.mipt.oop.readers.Reader;
+
+import java.util.Collection;
 
 @Configuration
 public class SpringConfigurationFile {
+
     @Bean
-    Reader<SmartHome> reader() {
-        return new JsonReaderSmartHome();
+    SensorEventsManager sensorEventsManager(ProcessingEvent eventProcessor, CCSensorEventConverter ccSensorEventConverter){
+        SensorEventsManager sensorEventsManager = new SensorEventsManager();
+        sensorEventsManager.registerEventHandler(new AdapterEventHandler(eventProcessor, ccSensorEventConverter));
+        return sensorEventsManager;
+    }
+
+    @Bean
+    public ProcessingEvent eventProcessor(Collection<ProcessingEvent> collectionEventProcess) {
+        return new EventDecorator(new EventProcessor(collectionEventProcess), alarm());
+    }
+
+    @Bean
+    ProcessingEvent processingLightEvent(){
+        return new ProcessingLightEvent(smartHome());
+    }
+
+    @Bean
+    ProcessingEvent processingHallDoorEvent(){
+        return new ProcessingHallDoorEvent(smartHome());
+    }
+
+    @Bean
+    ProcessingEvent processingDoorEvent(){
+        return new ProcessingDoorEvent(smartHome());
+    }
+
+    @Bean
+    ProcessingEvent processingAlarmEvent(){
+        return new ProcessingAlarmEvent(alarm());
+    }
+
+    @Bean
+    SmartHome smartHome() {
+        return new JsonReaderSmartHome().read();
     }
 
     @Bean
@@ -20,13 +57,24 @@ public class SpringConfigurationFile {
         return new Alarm("1234");
     }
 
+
     @Bean
-    SmartHome smartHome() {
-        return reader().read();
+    public CCSensorEventConverter ccSensorEventConverter(LightsIsOffConverter lightsIsOffConverter) {
+        return new LightsIsOnConverter(lightsIsOffConverter);
     }
 
     @Bean
-    StateHandler stateHandler() {
-        return new AdapterStateHandler(smartHome(), alarm());
+    public LightsIsOffConverter lightsIsOffConverter(DoorIsOpenedConverter doorIsOpenedConverter) {
+        return new LightsIsOffConverter(doorIsOpenedConverter);
+    }
+
+    @Bean
+    public DoorIsOpenedConverter doorIsOpenedConverter(DoorIsClosedConverter doorIsClosedConverter) {
+        return new DoorIsOpenedConverter(doorIsClosedConverter);
+    }
+
+    @Bean
+    DoorIsClosedConverter doorIsClosedConverter() {
+        return new DoorIsClosedConverter(null);
     }
 }

@@ -10,6 +10,10 @@ import java.nio.file.Paths;
 public class JsonReaderSmartHome implements Reader<SmartHome> {
     private String path;
 
+    public JsonReaderSmartHome() {
+
+    }
+
     // считываем состояние дома из файла
     @Override
     public SmartHome read() {
@@ -23,3 +27,4 @@ public class JsonReaderSmartHome implements Reader<SmartHome> {
         return null;
     }
 }
+

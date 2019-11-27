@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop.eventprocessors;
 
+import ru.sbt.mipt.oop.SensorEvent;
+
 public interface ProcessingEvent {
-    void processEvent();
+    void processEvent(SensorEvent event);
 }

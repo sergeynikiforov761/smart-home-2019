@@ -20,4 +20,9 @@ public class ActivationAlarmState implements AlarmState {
             alarm.changeState(new DangerAlarmState(alarm));
         }
     }
+
+    @Override
+    public void danger() {
+        alarm.changeState(new DangerAlarmState(alarm));
+    }
 }
