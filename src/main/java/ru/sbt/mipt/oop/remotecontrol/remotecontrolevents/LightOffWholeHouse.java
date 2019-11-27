@@ -16,7 +16,7 @@ public class LightOffWholeHouse implements Command {
         smartHome.execute(object -> {
             if (object instanceof Light) {
                 Light light = (Light) object;
-                light.setStatus(true);
+                light.setStatus(false);
             }
         });
     }
