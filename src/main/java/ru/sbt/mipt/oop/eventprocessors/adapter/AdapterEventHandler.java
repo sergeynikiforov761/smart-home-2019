@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.eventprocessors.adapter;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import com.coolcompany.smarthome.events.EventHandler;
-import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
 import ru.sbt.mipt.oop.eventprocessors.ProcessingEvent;
 import ru.sbt.mipt.oop.eventprocessors.adapter.converters.CCSensorEventConverter;
 
